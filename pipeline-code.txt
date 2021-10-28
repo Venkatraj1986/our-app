@@ -1,7 +1,7 @@
 pipeline {  
-    agent "any"  
+    agent any
     stages {  
-            stage ('Build') {  
+            stage ("Hello Pipeline Jobs") {  
                 steps {  
                         echo "Running build phase....again and again"
                 }  

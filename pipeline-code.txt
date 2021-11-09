@@ -1,10 +1,23 @@
-pipeline {  
+pipeline{
     agent any
-    stages {  
-            stage ("Hello Pipeline Jobs") {  
-                steps {  
-                        echo "Running build phase....again and again"
-                }  
-            }  
-    }  
-}  
+    tools {
+      maven 'maven3'
+    }
+    stages{
+        stage("Git Checkout"){
+            steps{
+                git credentialsId: 'javahometech', url: 'https://github.com/javahometech/my-app'
+            }
+        }
+        
+        stage("Maven Build"){
+            steps{
+                script{
+                    if(isUnix()){
+                       sh 'mvn clean package' 
+                    }
+                }
+            }
+        }
+    }
+}
